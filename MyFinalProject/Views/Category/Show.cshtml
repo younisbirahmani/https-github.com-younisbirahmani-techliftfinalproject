@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MyFinalProject.Models.Category>
+
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatDesc)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Img)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          <td>
+               <img height ="50" width="50" src="data:Img/jpeg;base64,@Convert.ToBase64String(item.Img)">
+           </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatDesc)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Img)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CatID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CatID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CatID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

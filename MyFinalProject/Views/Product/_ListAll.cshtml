@@ -1,0 +1,67 @@
+﻿
+@{
+    var sum = 0;
+}
+@using MyFinalProject.Models.VMs;
+@model IEnumerable<MyFinalProject.Models.Product>
+<img style="margin-left:1000px" src="/img/download.png" height="25" width="25" onclick="OpenCart()" />
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+
+
+
+    <div class="row">
+
+    @foreach (var item in Model)
+    {
+
+            <div class="col-3" style="border :3px blue; padding-block:auto">
+            @Html.DisplayNameFor(model => model.prodName):
+            @item.prodName
+                <hr>
+            @Html.DisplayNameFor(model => model.prodDesc):
+            @item.prodDesc
+                <hr>
+            @Html.DisplayNameFor(model => model.prodPrice):
+            @item.prodPrice
+                <hr>
+                        <a class="btn btn-secondary" asp-action="AddToCart" asp-route-prodId="@item.prodID">Add To Cart</a>
+
+            </div>
+
+
+    }
+    </div>
+<div class="modal" id="modal1" tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function OpenCart()
+    {
+        $.ajax({
+            type:'GET',
+            url:'/Product/ShowCart',
+            success:function(res)
+            {
+                $('.modal-body').html(res),
+                $('#modal1').modal('show')
+            }
+        });
+    }
+
+</script>
+
+
+
